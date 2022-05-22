@@ -1,0 +1,30 @@
+{
+  "name": "megablock",
+  "version": "0.0.0",
+  "description": "Block everyone who likes a particular tweet, as a web extension.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosmicexplorer/megablock.git"
+  },
+  "keywords": [
+    "chrome",
+    "firefox",
+    "extension",
+    "web"
+  ],
+  "author": "Danny McClanahan <dmcC2@hypnicjerk.ai>",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/cosmicexplorer/megablock/issues"
+  },
+  "homepage": "https://github.com/cosmicexplorer/megablock#readme",
+  "devDependencies": {
+    "coffeescript": "^2.7.0",
+    "glob": "^8.0.3",
+    "rimraf": "^3.0.2"
+  }
+}
