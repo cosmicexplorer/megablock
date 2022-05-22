@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "permissions": [
     "activeTab",
+    "contextMenus",
     "scripting"
   ],
   "manifest_version": 3,
