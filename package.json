@@ -25,6 +25,7 @@
   "devDependencies": {
     "coffeescript": "^2.7.0",
     "glob": "^8.0.3",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "sass": "^1.52.1"
   }
 }
