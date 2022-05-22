@@ -1,0 +1,16 @@
+{
+  "name": "megablock",
+  "description": "Block everyone who likes a particular tweet, as a web extension.",
+  "version": "0.0.0",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "manifest_version": 3,
+  "action": {
+    "default_title": "click to do something"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

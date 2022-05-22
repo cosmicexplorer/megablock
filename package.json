@@ -2,7 +2,6 @@
   "name": "megablock",
   "version": "0.0.0",
   "description": "Block everyone who likes a particular tweet, as a web extension.",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
