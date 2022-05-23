@@ -60,12 +60,11 @@ observeMutation = (mutations, observer) ->
       continue
     console.log m.target
     curLinks = currentlyVisibleLinks foundSection
-    if curLinks.length is 0
-      continue
     console.log curLinks
     allLikers.push ...curLinks
 
-    setTimeout tryCompleteScroll(foundSection, scrollIncrement, observer), 2000
+    if curLinks.length > 0
+      setTimeout tryCompleteScroll(foundSection, scrollIncrement, observer), 2000
 
 
 (new MutationObserver observeMutation).observe document,
