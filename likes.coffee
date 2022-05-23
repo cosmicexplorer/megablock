@@ -71,4 +71,8 @@ observeMutation = (mutations, observer) ->
   childList: yes
   subtree: yes
 
-# history.back()
+
+port.onMessage.addListener (msg) ->
+  if msg is 'back'
+    history.back()
+  else throw new Error "unrecognized message: #{msg}"
