@@ -8,15 +8,9 @@ allLikers = []
 
 # Functions:
 
-atSpans = (container) -> for innerSpan in container.querySelectorAll?('span') or []
-  # Vaguely match the text against regex to see if it's a username.
-  profileName = innerSpan.textContent.match(///^@([a-zA-Z0-9]+)$///)?[1]
-  continue unless profileName?
-  profileName
-
 currentlyVisibleLinks = (container) -> for innerSpan in container.querySelectorAll?('a span') or []
   # Vaguely match the text against regex to see if it's a username.
-  profileName = innerSpan.textContent.match(///^@([a-zA-Z0-9]+)$///)?[1]
+  profileName = innerSpan.textContent.match(///^@([a-zA-Z0-9_]+)$///)?[1]
   continue unless profileName?
   # We're looking for anchor tags pointing to the same person identified in the span.
   outerAnchor = innerSpan.closest 'a'
@@ -41,12 +35,11 @@ tryCompleteScroll = (scrollable, increment, observer) -> ->
       port.postMessage deduplicate allLikers
       # Scroll back to the top of the list.
       foundSection.scrollTo 0, 0
-  setTimeout complete, 400
+  setTimeout complete, 2000
 
 observeMutation = (mutations, observer) ->
   for m in mutations
     console.assert m.type is 'childList'
-    # if foundSection.contains m.target
     if not foundSection?
       for node in m.addedNodes
         if node.tagName is 'SECTION'
@@ -56,22 +49,23 @@ observeMutation = (mutations, observer) ->
           foundSection = likesModal.querySelector('section').parentElement
           console.assert getComputedStyle(foundSection).overflow == 'auto'
           initialScrollHeight = foundSection.scrollHeight
-          scrollIncrement = initialScrollHeight / 2
+          scrollIncrement = initialScrollHeight / 20
           console.log "scrollIncrement: #{scrollIncrement}"
           break
       if not foundSection?
         continue
     console.assert foundSection? and scrollIncrement?
 
+    if not foundSection.contains m.target
+      continue
     console.log m.target
-    curLinks = atSpans m.target
-    # curLinks = currentlyVisibleLinks m.target
+    curLinks = currentlyVisibleLinks foundSection
     if curLinks.length is 0
       continue
     console.log curLinks
     allLikers.push ...curLinks
 
-    setTimeout tryCompleteScroll(foundSection, scrollIncrement, observer), 500
+    setTimeout tryCompleteScroll(foundSection, scrollIncrement, observer), 2000
 
 
 (new MutationObserver observeMutation).observe document,
