@@ -12,9 +12,10 @@ currentTweet = null
 
 chrome.runtime.onConnect.addListener (port) ->
   switch port.name
-    when 'contextmenu-initiate'
-      port.onMessage.addListener (msg) ->
-        currentTweet = msg
+    when 'contextmenu-initiate' then port.onMessage.addListener (msg) ->
+      currentTweet = msg
+    when 'traverse-likes' then port.onMessage.addListener (msg) ->
+      console.log msg
     else throw new Error "unrecognized port name: #{port.name}"
 
 chrome.contextMenus.onClicked.addListener (info, {id: tabId}) ->
@@ -31,4 +32,6 @@ chrome.contextMenus.onClicked.addListener (info, {id: tabId}) ->
       pages = {statusPage, rtsPage, qtsPage, likesPage}
 
       console.log {context, pages}
+
+      # document.location.pathname = likesPage
     args: [currentTweet]

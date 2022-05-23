@@ -16,6 +16,14 @@
       "js": [
         "content.js"
       ]
+    },
+    {
+      "matches": [
+        "https://*.twitter.com/*/likes"
+      ],
+      "js": [
+        "likes.js"
+      ]
     }
   ],
   "background": {
