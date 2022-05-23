@@ -22,6 +22,7 @@ chrome.runtime.onConnect.addListener (port) ->
       console.log 'traverse-likes:'
       console.log msg
       if currentTweet?
+        # Tell the content script to go back a page in history.
         port.postMessage 'back'
     else throw new Error "unrecognized port name: #{port.name}"
 
@@ -39,6 +40,8 @@ chrome.contextMenus.onClicked.addListener (info, {id: tabId}) ->
       pages = {statusPage, rtsPage, qtsPage, likesPage}
 
       console.log {context, pages}
+      chrome.storage.local.set {tweetContext: JSON.stringify {context, pages}}
 
+      # Redirect to the /likes page, activating 'likes.coffee'.
       document.location.pathname = likesPage
     args: [currentTweet]

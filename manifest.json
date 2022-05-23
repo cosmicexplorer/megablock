@@ -5,7 +5,8 @@
   "permissions": [
     "activeTab",
     "contextMenus",
-    "scripting"
+    "scripting",
+    "storage"
   ],
   "manifest_version": 3,
   "content_scripts": [
@@ -22,6 +23,7 @@
         "https://*.twitter.com/*/likes"
       ],
       "js": [
+        "common.js",
         "likes.js"
       ]
     }
