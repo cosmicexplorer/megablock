@@ -3,11 +3,11 @@ port = chrome.runtime.connect name: 'traverse-likes'
 
 chrome.storage.local.get ['tweetContext'], ({tweetContext}) ->
   if tweetContext?
-    (new MutationObserver observeMutation port).observe document,
+    observer = new MutationObserver observeMutation(port, 'div[aria-label="Timeline: Liked by"]')
+    observer.observe document,
       childList: yes
       subtree: yes
 
-port.onMessage.addListener (msg) ->
-  if msg is 'back'
-    history.back()
-  else throw new Error "unrecognized message: #{msg}"
+port.onMessage.addListener ({next}) ->
+  console.log "next: #{next}"
+  document.location.pathname = next

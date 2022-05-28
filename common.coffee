@@ -32,13 +32,13 @@ tryCompleteScroll = (scrollable, increment, port, observer) -> ->
       foundSection.scrollTo 0, 0
   setTimeout complete, 2000
 
-observeMutation = (port) -> (mutations, observer) ->
+observeMutation = (port, labelSelector) -> (mutations, observer) ->
   for m in mutations
     console.assert m.type is 'childList'
     if not foundSection?
       for node in m.addedNodes
         if node.tagName is 'SECTION'
-          labelDiv = node.querySelector 'div[aria-label="Timeline: Liked by"]'
+          labelDiv = node.querySelector labelSelector
           likesModal = labelDiv.closest 'div[aria-modal="true"]'
           # Get the wrapper div with the scrollbar.
           foundSection = likesModal.querySelector('section').parentElement

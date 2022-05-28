@@ -26,6 +26,15 @@
         "common.js",
         "likes.js"
       ]
+    },
+    {
+      "matches": [
+        "https://*.twitter.com/*/retweets"
+      ],
+      "js": [
+        "common.js",
+        "rts.js"
+      ]
     }
   ],
   "background": {
